@@ -1,0 +1,48 @@
+html,
+	
+body {
+	height: 100%;
+}
+body {
+	text-align: left;
+	background-image: url(file:///Users/ezdeharjaber/Documents/Train-Scheduler/assets/images/6857c8c804007ae.jpg);
+	background-size: cover;
+	position: absolute no-repeat center center fixed;
+}
+#div {
+	margin-top: 0%;
+	padding: 0%;
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+    margin: auto;
+    box-sizing: border-box;
+}
+.card-img-bottom {
+    width: auto; 
+}
+table, th, td {
+	margin top: 1px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+    text-align: left;
+    
+}
+th, tr {
+	padding: 15px;
+	text-align: left;
+	border: 1px solid grey;
+	margin: auto;
+	margin-bottom: auto;
+}
+.table {
+	float: center;
+}
+form{
+	margin-top: 0%;
+    border-collapse: collapse;
+    background-color: white;
+    text-align: left;
+    margin-bottom: auto; 
+}
