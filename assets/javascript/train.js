@@ -30,7 +30,7 @@ var config = {
   	var firstTrainTime = $("#train-time-input").val().trim();
   	var frequency = $("#time-input").val().trim();
 
-
+  	//console.log("im running")
  database.ref('trains').child('train-' + trainCount).push({
     name: name,
     destination: destination,
@@ -45,28 +45,40 @@ database.ref('trains').on("child_added", function(snapshot) {
 	// a database value has changed
 	// take database change and update DOM (because the change could come from anywhere)
 	// get database change by using snapshot e.g. snapshot.name
+	//console.log("im running")
+	//console.log(snapshot)
 	snapshot.forEach(function(childSnapshot) {
-
-		var name = snapshot.val();
-		var destination = snapshot.val();
-		var firstTrainTime= snapshot.val();
-		var frequency= snapshot.val();
-		var trainCount = snapshot.val();
-
-		for (var i = 0; i < name.length; i++) {
+		console.log(childSnapshot.val())
+		var name = childSnapshot.val().name;
+		var destination = childSnapshot.val().destination;
+		var firstTrainTime= childSnapshot.val().firstTrainTime;
+		var frequency= childSnapshot.val().frequency;
+		var trainCount = childSnapshot.val().trainCount;
+		var nextArrival = childSnapshot.val().nextArrival;
+		var minutesAway = childSnapshot.val().minutesAway;
 
 			console.log(name)
 			console.log(destination)
 			console.log(firstTrainTime)
 			console.log(frequency)
 			console.log(trainCount)
+			console.log(nextArrival)
+			console.log(minutesAway)
 
-$("#-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+
+$("#schedule-table").append("<tr><td>" + name + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" +
+nextArrival + "</td><td>" + minutesAway + "</td></tr>");
 
 
-			}
+	
+			
 		});
 	});
 });
+
+//De bugging the last part 
+
+
+
+
 	
