@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	//use function above to clean up errors in the rest of the code if there are any
 var config = {
     apiKey: "AIzaSyAyxVUBQLGOcuEBRC2RSd_W9BrTD8-dJeU",
     authDomain: "train-schedule-a4e86.firebaseapp.com",
@@ -20,68 +21,52 @@ var config = {
  $("#submit-add").on("click", function(event) {
   	// someone has submitted info via the form in the html
   	// here, need to update the database
-  	event.preventDefault();
+ event.preventDefault();
 
   	trainCount++;
 
 	var name = $("#name-input").val().trim();
   	var destination = $("#destination-input").val().trim();
-  	var firstTrainTime = $("#train-time-input").val();
+  	var firstTrainTime = $("#train-time-input").val().trim();
   	var frequency = $("#time-input").val().trim();
 
-  	database.ref('trains').child('train-' + trainCount).push({
-        name: name,
-        destination: destination,
-        time: firstTrainTime,
-        frequency: frequency
-  	});
-});
-      	
-database.ref('trains').on("value", function(snapshot) {
 
+ database.ref('trains').child('train-' + trainCount).push({
+    name: name,
+    destination: destination,
+    time: firstTrainTime,
+    frequency: frequency
+  		});
+	});
+      	
+
+	//database.ref('trains').on("value", function(snapshot) {
+database.ref('trains').on("child_added", function(snapshot) {
 	// a database value has changed
 	// take database change and update DOM (because the change could come from anywhere)
 	// get database change by using snapshot e.g. snapshot.name
 	snapshot.forEach(function(childSnapshot) {
-	 for (var i = 0; i < nums.length; i++) {
-       {
-          console.log("");
-        }
 
-	var name = snapshot.child("name").val; 
-  	var destination = snapshot.child("destination")
-  	var firstTrainTime = snapshot.child("firstTrainTime")
-  	var frequency = snapshot.child("frequency")
+		var name = snapshot.val();
+		var destination = snapshot.val();
+		var firstTrainTime= snapshot.val();
+		var frequency= snapshot.val();
+		var trainCount = snapshot.val();
 
-	// update DOM with those variables
-	$("#train-name-input").val("");
-	$("#destination-input").val("");
-	$("#train-time-input").val("");
-	$("#time-input").val("");
-	};
+		for (var i = 0; i < name.length; i++) {
 
-// var randomDate = "03/17/2018";
-// var randomFormat = "MM/DD/YYYY";
-// var convertedDate = moment(randomDate, randomFormat);
+			console.log(name)
+			console.log(destination)
+			console.log(firstTrainTime)
+			console.log(frequency)
+			console.log(trainCount)
 
-// console.log(moment(convertedDate).format("MM/DD/YY"));
-// console.log(moment(convertedDate).format("MMM Do, YYYY hh:mm:ss"));
-// console.log(moment(convertedDate).format("X"));
-// console.log("----------------------------------------");
-
-// console.log(moment(convertedDate).toNow());
-// console.log(moment(convertedDate).diff(moment(), "years"));
-// console.log(moment(convertedDate).diff(moment(), "months"));
-// console.log(moment(convertedDate).diff(moment(), "days"));
-// console.log("----------------------------------------");
-
-// var newDate = moment("03/31/2018", randomFormat);
-// console.log(moment(convertedDate).diff(moment(newDate), "days"));
-
-// console.log(moment(convertedDate).format("X"));
-// console.log("----------------------------------------");
-
-// console.log(moment(convertedDate).format("DDD"));
-// console.log(moment(convertedDate).format("dddd"));
+$("#-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
+  empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
 
 
+			}
+		});
+	});
+});
+	
